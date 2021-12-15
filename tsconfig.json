@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "ES6",
+    "esModuleInterop": true,
+    "target": "es2019",
+    "moduleResolution": "node",
+    "typeRoots": ["./src/@types"],
+    "sourceMap": true,
+    "outDir": "dist",
+    "baseUrl": "src",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  }
+}
