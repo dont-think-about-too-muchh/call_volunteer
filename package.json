@@ -2,12 +2,12 @@
   "name": "phone",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/app.js",
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "dev": "nodemon -L --ext 'ts, json' --watch 'src/**/*.ts' --ignore 'src/**/*.test.ts' --exec 'node --experimental-specifier-resolution=node --loader ts-node/esm src/index.ts' ",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -L --ext 'ts, json' --watch 'src/**/*.ts' --ignore 'src/**/*.test.ts' --exec 'node --experimental-specifier-resolution=node --loader ts-node/esm src/app.ts'",
+    "start": "NODE_ENV=production node --experimental-modules --es-module-specifier-resolution=node dist/app.js",
     "lint:es": "eslint --ext js --ext ts './'",
     "lint:es:fix": "eslint --ext js --ext ts './' --fix",
     "lint:etc": "prettier './**/*.{json,yaml,md}' --check",
@@ -28,7 +28,9 @@
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
-    "lint-staged": "^12.1.2"
+    "lint-staged": "^12.1.2",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.4.0"
   },
   "dependencies": {
     "express": "^4.17.1"

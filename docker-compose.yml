@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  node:
+    build:
+      context: ./
+      target: dev
+    container_name: phone
+    restart: unless-stopped
+    command: npm run dev
+    ports:
+      - 3001:3000
+    env_file:
+      - .env
+    volumes:
+      - ./src:/app/src
