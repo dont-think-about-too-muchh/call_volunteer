@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { NotFoundError } from '../../errors'
-import { findByFirstNameService, IUserDoc } from '..'
+import { findByFirstNameService, IUserDoc, User as userRepository } from '..'
 
 type ReqBody = {
   firstName: string
@@ -14,7 +14,9 @@ export async function findByFirstNameController(
   { body: { firstName } }: Request<unknown, unknown, ReqBody>,
   res: Response<ResBody>
 ) {
-  const users = await findByFirstNameService(firstName)
+  const users = await findByFirstNameService(firstName, {
+    userRepository,
+  })
   if (!users) {
     throw new NotFoundError()
   }
