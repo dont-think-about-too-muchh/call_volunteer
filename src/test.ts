@@ -1,6 +1,6 @@
-import { IUser, User } from './users/user.model'
+import { IUser, User } from './users'
 
-export async function testFunc() {
+export async function testCreateUser() {
   const user: IUser = {
     firstName: 'kim',
     lastName: 'dohun',
@@ -11,9 +11,12 @@ export async function testFunc() {
   console.log('이것은 테스트 함수입니다1.')
 }
 
-export async function testFunc2() {
+export async function testFindByFirstName() {
   const firstName = 'kim'
-  const user = await User.findByFirstName({ firstName })
-  console.log('이것은 테스트 함수입니다2.', user)
-  return user
+  const users = await User.findByFirstName({ firstName })
+  console.log('이것은 테스트 함수입니다2.', users)
+  for (const user of users) {
+    console.log(await user.getFirstName())
+  }
+  return users
 }

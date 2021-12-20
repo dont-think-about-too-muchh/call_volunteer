@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { User } from './users/user.model'
+import { User } from './users/model/user.schema'
 import { MONGO_URI } from './config'
 
 let database: mongoose.Connection | undefined

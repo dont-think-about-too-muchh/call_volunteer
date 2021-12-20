@@ -1,16 +1,17 @@
 import express, { Request, Response, NextFunction } from 'express'
+import { userRoutes } from './users'
 import { HttpError, NotFoundError } from './errors'
-import { testFunc, testFunc2 } from './test'
+import { testCreateUser, testFindByFirstName } from './test'
 
 export const createApp = () => {
   const app = express()
 
   app.get('/health', (_: Request, res: Response) => {
-    testFunc()
+    testCreateUser()
     return res.json('ok')
   })
   app.get('/test', (_: Request, res: Response) => {
-    testFunc2()
+    testFindByFirstName()
     return res.json('ok')
   })
 
@@ -22,6 +23,8 @@ export const createApp = () => {
       next(err)
     }
   })
+
+  app.use('/api/v1', userRoutes)
 
   app.use((e: Error, _: Request, res: Response, _next: NextFunction) => {
     if (e instanceof HttpError) {
