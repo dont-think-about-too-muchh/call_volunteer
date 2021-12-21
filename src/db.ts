@@ -4,7 +4,7 @@ import { MONGO_URI } from './config'
 
 let database: mongoose.Connection | undefined
 
-export async function mongoConnection() {
+export async function connectMongo() {
   if (database) {
     return
   }
@@ -26,7 +26,7 @@ export async function mongoConnection() {
   return { User }
 }
 
-export const mongoDisconnect = () => {
+export const disconnectMongo = () => {
   if (!database) {
     return
   }
