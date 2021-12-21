@@ -31,6 +31,7 @@ const UserSchema = new mongoose.Schema<IUser, IUserModel>(
   }
 )
 
+// UserSchema.statics.findByFirstName = findByFirstName
 UserSchema.static('findByFirstName', findByFirstName)
 UserSchema.method('getFirstName', getFirstName)
 // Create and export user model

@@ -1,8 +1,10 @@
 import { IUserDoc, IUserModel } from '..'
 
-export function findByFirstNameService(
+export async function findByFirstNameService(
   firstName: string,
-  { userRepository }: { userRepository: IUserModel }
+  { userModel }: { userModel: IUserModel }
 ): Promise<IUserDoc[]> {
-  return userRepository.findByFirstName({ firstName })
+  const users = await userModel.find({ firstName })
+
+  return users
 }
