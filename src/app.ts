@@ -1,7 +1,11 @@
 import express, { Request, Response, NextFunction } from 'express'
 import { userRoutes } from './users'
 import { HttpError, NotFoundError } from './errors'
-import { testCreateUser, testFindByFirstName } from './test'
+import {
+  testCreateUser,
+  testFindByFirstName,
+  testFindByFirstName2,
+} from './test'
 
 export const createApp = () => {
   const app = express()
@@ -12,6 +16,10 @@ export const createApp = () => {
   })
   app.get('/test', (_: Request, res: Response) => {
     testFindByFirstName()
+    return res.json('ok')
+  })
+  app.get('/test2', (_: Request, res: Response) => {
+    testFindByFirstName2()
     return res.json('ok')
   })
 
