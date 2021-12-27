@@ -1,29 +1,22 @@
 import mongoose from 'mongoose'
-// import { MutableDAYS } from '.'
-
-export const DAYS_OF_WEEK = [
-  'Sun',
-  'Mon',
-  'Tue',
-  'Wed',
-  'Thu',
-  'Fri',
-  'Sat',
-] as const
+import { DAYS_OF_WEEK } from '..'
 
 export type Days = typeof DAYS_OF_WEEK[number]
 
-// type Mutable<T> = { -readonly [P in keyof T]: T[P] }
-// type MutableDAYS = Mutable<typeof DAYS>
-// const test: Mutable<typeof DAYS> = [...DAYS]
-
 // Create the interface
-export interface IVolunteer {
-  name: string
-  phoneNumber: number
+export type EnableTime = {
   startTime?: number
   endTime?: number
-  days?: Days[]
+}
+
+export type EnableWeeks = {
+  [days in Days]?: EnableTime[]
+}
+export interface IVolunteer {
+  name: string
+  phoneNumber: string
+  organization?: string
+  enableWeek?: EnableWeeks
 }
 
 export interface IVolunteerDoc extends IVolunteer, mongoose.Document {

@@ -1,13 +1,17 @@
 import { Request, Response } from 'express'
 import { NotFoundError } from '../../errors'
-import { createVolunteerService, IVolunteerDoc, Days, Volunteer } from '..'
+import {
+  createVolunteerService,
+  IVolunteerDoc,
+  Volunteer,
+  EnableWeeks,
+} from '..'
 
 type ReqBody = {
   name: string
-  phoneNumber: number
-  startTime?: Date
-  endTime?: Date
-  days?: Days[]
+  phoneNumber: string
+  organization?: string
+  enableWeek?: EnableWeeks
 }
 
 type ResBody = {

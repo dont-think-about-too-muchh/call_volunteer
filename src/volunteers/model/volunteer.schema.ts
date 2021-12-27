@@ -1,7 +1,6 @@
 // Create the schema
 import mongoose from 'mongoose'
-import { DateTime } from 'luxon'
-import { DAYS_OF_WEEK, IVolunteer, IVolunteerModel } from '.'
+import { IVolunteer, IVolunteerModel } from '.'
 
 const VolunteerSchema = new mongoose.Schema<IVolunteer, IVolunteerModel>(
   {
@@ -10,25 +9,16 @@ const VolunteerSchema = new mongoose.Schema<IVolunteer, IVolunteerModel>(
       required: true,
     },
     phoneNumber: {
-      type: Number,
+      type: String,
       required: true,
     },
-    startTime: {
-      type: Date,
-      default: DateTime.local(2017, 3, 12, 10, {
-        zone: 'Asia/Seoul',
-      }).toJSDate(),
+    organization: {
+      type: String,
     },
-    endTime: {
-      type: Date,
-      default: DateTime.local(2017, 3, 12, 20, {
-        zone: 'Asia/Seoul',
-      }).toJSDate(),
-    },
-    days: {
-      type: [String],
-      enum: DAYS_OF_WEEK,
-      default: [...DAYS_OF_WEEK],
+    enableWeek: {
+      type: Map,
+      of: [{ startTime: Number, endTime: Number }],
+      //   of: [new mongoose.Schema({ startTime: Number, endTime: Number })],
     },
   },
   {

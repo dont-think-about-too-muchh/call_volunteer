@@ -1,34 +1,45 @@
-import { DateTime } from 'luxon'
-import { IVolunteer, IVolunteerModel, Days } from '..'
+import {
+  IVolunteer,
+  IVolunteerModel,
+  IVolunteerDoc,
+  EnableWeeks,
+  DAYS_OF_WEEK,
+  defaultEnableTime,
+} from '..'
+
+function createDefaultEnableWeek(): EnableWeeks {
+  const enableWeek: EnableWeeks = {}
+
+  DAYS_OF_WEEK.forEach((day) => {
+    Object.assign(enableWeek, { ...enableWeek, [day]: defaultEnableTime })
+  })
+
+  return enableWeek
+}
 
 export async function createVolunteerService(
   {
     name,
     phoneNumber,
-    startTime,
-    endTime,
-    days,
+    organization,
+    enableWeek,
   }: {
     name: string
-    phoneNumber: number
-    startTime?: Date
-    endTime?: Date
-    days?: Days[]
+    phoneNumber: string
+    organization?: string
+    enableWeek?: EnableWeeks
   },
   {
     volunteerModel,
   }: {
     volunteerModel: IVolunteerModel
   }
-) {
+): Promise<IVolunteerDoc> {
   const volunteerConfig: IVolunteer = {
     name,
     phoneNumber,
-    startTime: startTime
-      ? DateTime.fromJSDate(startTime).get('hour')
-      : undefined,
-    endTime: endTime ? DateTime.fromJSDate(endTime).get('hour') : undefined,
-    days,
+    organization,
+    enableWeek: enableWeek || createDefaultEnableWeek(),
   }
   const volunteer = await volunteerModel.create(volunteerConfig)
 
