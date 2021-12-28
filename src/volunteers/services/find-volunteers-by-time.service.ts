@@ -6,14 +6,37 @@ export async function findVolunteersByTimeService({
 }: {
   volunteerModel: IVolunteerModel
 }) {
-  const date = DateTime.local({ zone: 'Asia/Seoul' })
-  const hour = date.get('hour')
+  const now = DateTime.local({ zone: 'Asia/Seoul' })
+  const weekday = String(now.get('weekdayShort'))
+  const currentHour = now.get('hour') + 0.5
 
-  const volunteers = await volunteerModel.find({
-    days: { $in: String(date.get('weekdayShort')) },
-    startTime: { $gte: hour },
-    endTime: { $lte: hour },
-  })
+  const startTimeProperty = `enableWeek.${weekday}.startTime`
+  const endTimeProperty = `enableWeek.${weekday}.endTime`
+
+  const volunteers = await volunteerModel
+    .find({
+      $or: [
+        {
+          $and: [
+            { [startTimeProperty]: { $lte: currentHour } },
+            { [endTimeProperty]: { $gte: currentHour } },
+          ],
+        },
+        {
+          $and: [
+            { [startTimeProperty]: undefined },
+            { [endTimeProperty]: { $gte: currentHour } },
+          ],
+        },
+        {
+          $and: [
+            { [startTimeProperty]: { $lte: currentHour } },
+            { [endTimeProperty]: undefined },
+          ],
+        },
+      ],
+    })
+    .exec()
 
   return volunteers
 }

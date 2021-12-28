@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { EnableWeeks, IVolunteer } from './volunteers'
+import { Days, EnableWeeks, IVolunteer } from './volunteers'
 import { IUser } from './users'
 
 export function testUser({
@@ -39,16 +39,15 @@ export function testVolunteer({
   enableWeek?: EnableWeeks
 } = {}): IVolunteer {
   const now = DateTime.local({ zone: 'Asia/Seoul' })
-  const weekday = String(now.get('weekdayShort'))
+  const currentTime = now.get('hour')
+  const weekday = String(now.get('weekdayShort')) as Days
+
   return {
     name: name || 'testKim',
     phoneNumber: phoneNumber || '01012345678',
-    organization: organization || 'Korea Army',
+    organization: organization || 'Korea_Army',
     enableWeek: enableWeek || {
-      [weekday]: [
-        { startTime: now.get('hour') - 1, endTime: now.get('hour') + 1 },
-      ],
+      [weekday]: [{ startTime: currentTime - 1, endTime: currentTime + 1 }],
     },
-    // enableWeek: enableWeek || { Sun: [{ startTime: 10, endTime: 20 }] },
   }
 }
