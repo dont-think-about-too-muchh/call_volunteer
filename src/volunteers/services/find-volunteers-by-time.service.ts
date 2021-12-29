@@ -3,7 +3,7 @@ import { IVolunteerDoc, IVolunteerModel } from '..'
 
 // TODO api로 노출하지 않고 twilio로 전화 연결 할 때 사용 예정
 
-export async function findVolunteersByTimeService({
+export function findVolunteersByTimeService({
   volunteerModel,
 }: {
   volunteerModel: IVolunteerModel
@@ -15,7 +15,7 @@ export async function findVolunteersByTimeService({
   const startTimeProperty = `enableWeek.${weekday}.startTime`
   const endTimeProperty = `enableWeek.${weekday}.endTime`
 
-  const volunteers = await volunteerModel
+  return volunteerModel
     .find({
       $or: [
         {
@@ -39,6 +39,4 @@ export async function findVolunteersByTimeService({
       ],
     })
     .exec()
-
-  return volunteers
 }

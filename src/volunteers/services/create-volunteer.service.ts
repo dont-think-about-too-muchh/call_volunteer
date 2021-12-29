@@ -9,15 +9,13 @@ import {
 
 function createDefaultEnableWeek(): EnableWeeks {
   const enableWeek: EnableWeeks = {}
-
   DAYS_OF_WEEK.forEach((day) => {
     Object.assign(enableWeek, { ...enableWeek, [day]: defaultEnableTime })
   })
-
   return enableWeek
 }
 
-export async function createVolunteerService(
+export function createVolunteerService(
   {
     name,
     phoneNumber,
@@ -41,7 +39,5 @@ export async function createVolunteerService(
     organization,
     enableWeek: enableWeek || createDefaultEnableWeek(),
   }
-  const volunteer = await volunteerModel.create(volunteerConfig)
-
-  return volunteer
+  return volunteerModel.create(volunteerConfig)
 }

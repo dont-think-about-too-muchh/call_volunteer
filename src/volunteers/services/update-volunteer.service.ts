@@ -1,6 +1,7 @@
+import mongoose from 'mongoose'
 import { IVolunteerModel, IVolunteer } from '..'
 
-export async function updateVolunteerService(
+export function updateVolunteerService(
   id: string,
   { name, phoneNumber, organization, enableWeek }: Partial<IVolunteer>,
   {
@@ -8,9 +9,11 @@ export async function updateVolunteerService(
   }: {
     volunteerModel: IVolunteerModel
   }
-) {
-  await volunteerModel.updateOne(
-    { id },
-    { $set: { name, phoneNumber, organization, enableWeek } }
-  )
+): Promise<mongoose.UpdateWriteOpResult> {
+  return volunteerModel
+    .updateOne(
+      { id },
+      { $set: { name, phoneNumber, organization, enableWeek } }
+    )
+    .exec()
 }

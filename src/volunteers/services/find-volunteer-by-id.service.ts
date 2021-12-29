@@ -1,6 +1,6 @@
 import { IVolunteerModel, IVolunteerDoc } from '..'
 
-export async function findVolunteerByIdService(
+export function findVolunteerByIdService(
   { id }: { id: string },
   {
     volunteerModel,
@@ -8,7 +8,5 @@ export async function findVolunteerByIdService(
     volunteerModel: IVolunteerModel
   }
 ): Promise<IVolunteerDoc | null> {
-  const volunteer = await volunteerModel.findById(id)
-
-  return volunteer
+  return volunteerModel.findById(id).exec()
 }
