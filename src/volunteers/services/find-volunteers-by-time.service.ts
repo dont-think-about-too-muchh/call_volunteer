@@ -1,11 +1,13 @@
 import { DateTime } from 'luxon'
-import { IVolunteerModel } from '..'
+import { IVolunteerDoc, IVolunteerModel } from '..'
+
+// TODO api로 노출하지 않고 twilio로 전화 연결 할 때 사용 예정
 
 export async function findVolunteersByTimeService({
   volunteerModel,
 }: {
   volunteerModel: IVolunteerModel
-}) {
+}): Promise<IVolunteerDoc[]> {
   const now = DateTime.local({ zone: 'Asia/Seoul' })
   const weekday = String(now.get('weekdayShort'))
   const currentHour = now.get('hour') + 0.5

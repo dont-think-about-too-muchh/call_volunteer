@@ -1,15 +1,14 @@
-import express, { Request, Response } from 'express'
-import { createVolunteerController } from './controllers'
-import { Volunteer } from './model'
-import { findVolunteersByTimeService } from './services'
+import express from 'express'
+import {
+  createVolunteerController,
+  findVolunteerByIdController,
+  updateVolunteerController,
+} from './controllers'
 
 const volunteerRoutes = express.Router()
 
-volunteerRoutes.get('', async (_: Request, res: Response) => {
-  const test = await findVolunteersByTimeService({ volunteerModel: Volunteer })
-
-  res.json({ test })
-})
-
+volunteerRoutes.get('/:id', findVolunteerByIdController)
+volunteerRoutes.patch('/:id', updateVolunteerController)
 volunteerRoutes.post('', createVolunteerController)
+
 export { volunteerRoutes }
