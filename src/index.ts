@@ -6,7 +6,7 @@ const main = async () => {
   await connectMongo()
 
   createApp().listen(PORT, () => {
-    console.log(`서버가 열렸습니다. ${PORT}`)
+    console.log(`서버가 열렸습니다. ${PORT}`, process.env.NODE_ENV)
   })
 }
 

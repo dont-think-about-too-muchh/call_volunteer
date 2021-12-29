@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
-import { User } from './users/model/user.schema'
-import { MONGO_URI } from './config'
+import { Volunteer } from './volunteers'
+import { User } from './users'
+import { DB_CONFIG, MONGO_URI } from './config'
 
 let database: mongoose.Connection | undefined
 
@@ -8,7 +9,7 @@ export async function connectMongo() {
   if (database) {
     return
   }
-  await mongoose.connect(MONGO_URI, { dbName: 'test' })
+  await mongoose.connect(MONGO_URI, DB_CONFIG)
 
   database = mongoose.connection
 
@@ -23,7 +24,7 @@ export async function connectMongo() {
   })
 
   // eslint-disable-next-line consistent-return
-  return { User }
+  return { User, Volunteer }
 }
 
 export const disconnectMongo = () => {

@@ -17,8 +17,12 @@ const VolunteerSchema = new mongoose.Schema<IVolunteer, IVolunteerModel>(
     },
     enableWeek: {
       type: Map,
-      of: [{ startTime: Number, endTime: Number }],
-      //   of: [new mongoose.Schema({ startTime: Number, endTime: Number })],
+      of: [
+        new mongoose.Schema({
+          startTime: Number,
+          endTime: Number,
+        }),
+      ],
     },
   },
   {
@@ -28,6 +32,35 @@ const VolunteerSchema = new mongoose.Schema<IVolunteer, IVolunteerModel>(
     },
   }
 )
+
+VolunteerSchema.index({
+  'enableWeek.Sun.startTime': -1,
+  'enableWeek.Sun.endTime': -1,
+})
+VolunteerSchema.index({
+  'enableWeek.Mon.startTime': -1,
+  'enableWeek.Mon.endTime': -1,
+})
+VolunteerSchema.index({
+  'enableWeek.Tue.startTime': -1,
+  'enableWeek.Tue.endTime': -1,
+})
+VolunteerSchema.index({
+  'enableWeek.Thu.startTime': -1,
+  'enableWeek.Thu.endTime': -1,
+})
+VolunteerSchema.index({
+  'enableWeek.Wed.startTime': -1,
+  'enableWeek.Wed.endTime': -1,
+})
+VolunteerSchema.index({
+  'enableWeek.Fri.startTime': -1,
+  'enableWeek.Fri.endTime': -1,
+})
+VolunteerSchema.index({
+  'enableWeek.Sat.startTime': -1,
+  'enableWeek.Sat.endTime': -1,
+})
 
 // UserSchema.statics.findByFirstName = findByFirstName
 
