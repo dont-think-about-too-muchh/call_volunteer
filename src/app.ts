@@ -1,4 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express'
+import { requestRoutes } from './requests'
 import { volunteerRoutes } from './volunteers'
 import { userRoutes } from './users'
 import { HttpError, NotFoundError } from './errors'
@@ -25,6 +26,7 @@ export const createApp = () => {
 
   app.use('/api/v1/users', userRoutes)
   app.use('/api/v1/volunteers', volunteerRoutes)
+  app.use('/api/v1/requests', requestRoutes)
 
   app.use((e: Error, _: Request, res: Response, _next: NextFunction) => {
     if (e instanceof HttpError) {

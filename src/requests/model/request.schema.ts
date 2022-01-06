@@ -23,10 +23,17 @@ const RequestSchema = new mongoose.Schema<IRequest, IRequestModel>(
   }
 )
 
-// RequestSchema.index({
-//   'enableWeek.Sun.startTime': -1,
-//   'enableWeek.Sun.endTime': -1,
-// })
+RequestSchema.index({
+  status: -1,
+  createdAt: 1,
+})
+// RequestSchema.index(
+//   {
+//     _id: -1,
+//     status: -1,
+//   },
+//   { partialFilterExpression: { status: 'Pending' } }
+// )
 
 export const Request = mongoose.model<IRequest, IRequestModel>(
   'Request',

@@ -2,7 +2,11 @@ import { DateTime } from 'luxon'
 import { testVolunteer } from '../../factories'
 import { Volunteer, Days } from '..'
 import { createVolunteerService, findVolunteersByTimeService } from '.'
-import { connectTestMongo, closeTestMongo, clearTestMongo } from '../../tests'
+import {
+  connectTestMongo,
+  closeTestMongo,
+  clearTestMongo,
+} from '../../in-memory-mongo'
 
 beforeAll(async () => {
   await connectTestMongo()

@@ -1,6 +1,10 @@
 import { testUser } from '../../factories'
 import { findByFirstNameService, User } from '..'
-import { connectTestMongo, closeTestMongo, clearTestMongo } from '../../tests'
+import {
+  connectTestMongo,
+  closeTestMongo,
+  clearTestMongo,
+} from '../../in-memory-mongo'
 
 beforeAll(async () => {
   await connectTestMongo()

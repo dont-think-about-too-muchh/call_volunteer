@@ -1,7 +1,11 @@
 import { testVolunteer } from '../../factories'
 import { Volunteer } from '..'
 import { createVolunteerService } from '.'
-import { connectTestMongo, closeTestMongo, clearTestMongo } from '../../tests'
+import {
+  connectTestMongo,
+  closeTestMongo,
+  clearTestMongo,
+} from '../../in-memory-mongo'
 
 beforeAll(async () => {
   await connectTestMongo()

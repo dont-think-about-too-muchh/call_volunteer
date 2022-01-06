@@ -2,7 +2,11 @@ import mongoose from 'mongoose'
 import { testVolunteer } from '../../factories'
 import { Volunteer } from '..'
 import { createVolunteerService, findVolunteerByIdService } from '.'
-import { connectTestMongo, closeTestMongo, clearTestMongo } from '../../tests'
+import {
+  connectTestMongo,
+  closeTestMongo,
+  clearTestMongo,
+} from '../../in-memory-mongo'
 
 beforeAll(async () => {
   await connectTestMongo()
